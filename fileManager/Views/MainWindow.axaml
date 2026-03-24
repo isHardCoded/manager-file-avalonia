@@ -10,11 +10,32 @@
         Title="fileManager">
 
     <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
         <vm:MainWindowViewModel/>
     </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <StackPanel Margin="50 10 50 0">
+         <StackPanel Orientation="Horizontal" Spacing="5">
+			<Button Content="Создать файл" Command="{Binding CreateFileCommand}" />
+			<Button Content="Создать папку" Command="{Binding CreateFolderCommand}" />
+			<Button Content="Удалить" Command="{Binding DeleteCommand}" />
+			<Button Content="Открыть" Command="{Binding OpenFileCommand}" />
+			<Button Content="Сохранить" Command="{Binding SaveFileCommand}" />
+			<Button Content="Обновить" Command="{Binding LoadDirectoryCommand}" />
+        </StackPanel>
+
+        <TextBox Text="{Binding CurrentPath}" Margin="0 10 0 10" />
+
+		<ListBox Height="400" ScrollViewer.HorizontalScrollBarVisibility="Visible" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}">
+		    <ListBox.ItemTemplate>
+			    <DataTemplate>
+				    <StackPanel Orientation="Horizontal" Spacing="5">
+					    <TextBlock Text="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <TextBox Text="{Binding FileContent}" Height="100" />
+    </StackPanel>
 
 </Window>
